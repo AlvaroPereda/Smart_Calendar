@@ -1,0 +1,38 @@
+﻿
+
+<div class="text-center">
+    <form action="/" method="POST">
+        <label>Nombre de la tarea<input type="text" name="task" required></label><br>
+        <label>Fecha de finalización<input type="Date" name="date" required></label><br>
+        <label>Horas requeridas<input type="number"name="hours" required></label><br>
+        <button type="submit">Crear</button>
+    </form>
+
+    <button id="btnViewTasks">Ver Tareas</button>
+    <div id="taskList"></div>
+    <button id="btnCreateWorker">Crear trabajador</button>
+    <button id="btnViewWorkers">Ver Trabajadores</button>
+</div>
+
+<script>
+    document.getElementById("btnViewTasks").addEventListener("click", async function() {
+        const data = await fetch('/Home/GetTasks');
+        const final = await data.json();
+        const taskListDiv = document.getElementById("taskList");
+        taskListDiv.innerHTML = "";
+        final.forEach(task => {
+            const taskItem = document.createElement("div");
+            console.log(task)
+            taskItem.textContent = `Tarea: ${task.title}, Fecha: ${task.deadline}, Horas: ${task.hours}, Prioridad: ${task.priority.toFixed(2)}`;
+            taskListDiv.appendChild(taskItem);
+        });
+    });
+    document.getElementById("btnCreateWorker").addEventListener("click", async function() {
+        const data = await fetch('/Home/CreateWorker');
+    });
+    document.getElementById("btnViewWorkers").addEventListener("click", async function() {
+        const data = await fetch('/Home/GetWorkers');
+        const final = await data.json();
+        console.log(final);
+    });
+</script>

@@ -1,0 +1,10 @@
+namespace Calendar.Models
+{
+    public class Worker
+    {
+        public int Id { get; set; }
+        public required string Name { get; set; }
+        public List<Schedule> Schedules { get; set; } = [];
+        public List<TaskItem> ContainerTasks { get; set; } = [];
+    }
+}
