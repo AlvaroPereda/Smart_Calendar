@@ -26,58 +26,6 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Index(string task, DateOnly date, int hours)
-    {
-        TaskItem nuevaTarea = new()
-        {
-            Title = task,
-            Deadline = date,
-            Hours = hours,
-            Priority = CalculatePriority(date, hours)
-        };
-        nuevaTarea = await CalculateSchedule(nuevaTarea);
-        await _db.UpdateContainerTasks(1, nuevaTarea);
-        return View();
-    }
-
-    private async Task<TaskItem> CalculateSchedule(TaskItem task)
-    {
-        Worker worker = await GetWorker();
-        List<Schedule> horarios = worker.Schedules;
-        List<TaskItem> tasksWorker = worker.ContainerTasks;
-        if (tasksWorker.Count == 0)
-        {
-            var result = horarios[0].StartTime.AddHours(task.Hours);
-            task.Start = DateTime.Today.Add(horarios[0].StartTime.ToTimeSpan());
-            task.End = DateTime.Today.Add(result.ToTimeSpan());
-            return task;
-        }
-        else
-        {
-            List<TaskItem> allTasks = [..tasksWorker, task];
-            allTasks.Sort((a, b) => b.Priority.CompareTo(a.Priority));
-
-            DateTime startTime = DateTime.Today.Add(horarios[0].StartTime.ToTimeSpan());
-
-            foreach (var t in allTasks)
-            {
-                t.Start = startTime;
-                t.End = startTime.AddHours(t.Hours);
-                startTime = t.End;
-            }
-        }
-
-        return task;
-    }
-    private static double CalculatePriority(DateOnly date, int hours)
-    {
-
-        double daysleft = (date.ToDateTime(new TimeOnly()) - DateTime.Now).TotalDays;
-        double priority = hours / (daysleft + 1);
-        return priority;
-    }
-
     public async Task<IActionResult> GetTasks()
     {
         var worker = await _db.GetAllTasks(1);

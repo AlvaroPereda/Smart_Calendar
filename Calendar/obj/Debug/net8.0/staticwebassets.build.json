@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "I5AMWxflRI83BxVyPPMgZAPG7mM4K9fJy4ReqyL9XgE=",
+  "Hash": "LZUecr2BJFvVvAmCjM3kBV/h5PyxnmHMyDdKmAD/BKM=",
   "Source": "Calendar",
   "BasePath": "_content/Calendar",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Calendar/wwwroot/js/calendar.js",
+      "SourceId": "Calendar",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Calendar/wwwroot/",
+      "BasePath": "_content/Calendar",
+      "RelativePath": "js/calendar.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/calendar.js"
     },
     {
       "Identity": "/Calendar/wwwroot/js/site.js",
