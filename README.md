@@ -26,5 +26,7 @@ docker compose down -v
 ```
 ```bash
 docker rmi smart_calendar-net
+```
+```bash
 docker rmi mysql
 ```
